@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>Family Simulator</title>
+</head>
+<body>
+<h1>Family Simulator</h1>
+<form>
+    <input type="submit" name="add_mum" value="Add Mum" />
+    <input type="submit" name="add_dad" value="Add Dad" />
+    <input type="submit" name="add_child" value="Add Child" />
+    <input type="submit" name="add_adapt_child" value="Add Adapt Child" />
+    <input type="submit" name="add_cat" value="Add Cat" />
+    <input type="submit" name="add_dog" value="Add Dog" />
+    <input type="submit" name="add_goldfish" value="Add Goldfish" />
+    <input type="submit" name="reset" value="Reset" />
+</form>
+
+<div>
+{#    {{ list|raw }}#}
+    {% include 'list.twig' with {'familySimulator': family} %}
+</div>
+
+<script src="public/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    (function( $ ) {
+        $( 'input' ).on( 'click', function() {
+            $( 'input' ).removeAttr('data-clicked');
+            $( this ).attr('data-clicked', 'clicked');
+        })
+        $( 'form' ).on( 'submit', function( e ) {
+            e.preventDefault();
+
+            $.ajax({
+                method: "POST",
+                url: "familySimulator",
+                data: { control: $( '[data-clicked]' ).attr( 'name' ) },
+                dataType:'json',
+            }).done(function( response ) {
+                if (response.error) {
+                    alert(response.message);
+                } else {
+                    $('div').html(response.html);
+                }
+
+
+                // if( error ) {
+                //     alert( error );
+                // } else {
+                //
+                //     console.log('saasasas');return;
+                //
+                //     $.ajax({
+                //         method: "POST",
+                //         data: { refresh: 1 }
+                //     }).done(function( sum ) {
+                //         if( sum ) {
+                //             $( 'div' ).html( sum );
+                //         }
+                //     });
+                // }
+            });
+        } );
+    })(jQuery);
+</script>
+
+
+</body>
+</html>
+

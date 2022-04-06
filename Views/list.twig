@@ -1,0 +1,25 @@
+{% if familySimulator.count %}
+    <h2>Family</h2>
+    <ul>
+        {% if familySimulator.father %}
+            <li>Dad: {{ familySimulator.father }}</li>
+        {% endif %}
+        {% if familySimulator.mother %}
+            <li>Mum: {{ familySimulator.mother }}</li>
+        {% endif %}
+        {% if familySimulator.children %}
+            <li>Children: {{ familySimulator.children }}</li>
+        {% endif %}
+        {% if familySimulator.cats %}
+            <li>Cats: {{ familySimulator.cats }}</li>
+        {% endif %}
+        {% if familySimulator.dogs %}
+            <li>Dogs: {{ familySimulator.dogs }}</li>
+        {% endif %}
+        {% if familySimulator.goldFish %}
+            <li>GoldFish: {{ familySimulator.goldFish }}</li>
+        {% endif %}
+        <li><b>Total Members</b>: {{ familySimulator.count }}</li>
+        <li><b>Monthly Food Costs</b>: {{ familySimulator.foodExpense }} $ </li>
+    </ul>
+{% endif %}
